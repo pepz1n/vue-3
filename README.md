@@ -1,24 +1,7 @@
-# alura-tracker
+# Vue-3
 
-## Project setup
-```
-npm install
-```
+## Sobre
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+> Repositório com objetivo de aprender algumas funcionalidades do VueJs 3, nada profissional;
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+> O objetivo do projeto é um site para adicionar a tarefa, contando o tempo gasto e mostrando o histórico, talvez guarde em algum lugar no localstorage.
