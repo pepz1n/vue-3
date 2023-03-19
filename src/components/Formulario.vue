@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div class="box formulario">
     <div class="columns">
       <div class="column is-8" role="form" aria-label="Formulario">
         <input v-model="descricao" type="text" class="input" placeholder="Qual tarefa você deseja iniciar?">
@@ -17,6 +17,7 @@ import TemporizadorVue from "@/components/TemporizadorVue.vue";
 
 export default defineComponent({
   name: 'FormularioVue',
+  emits: ['aoSalvarTarefa'],
   data() {
     return {
       descricao: '',
@@ -27,11 +28,20 @@ export default defineComponent({
   },
   methods: {
     finalizarTarefa(tempoDecorrido: number): void {
-      console.log(tempoDecorrido);
+      this.$emit('aoSalvarTarefa', {
+        duracaoEmSegundos: tempoDecorrido,
+        descricao: this.descricao,
+      });
       this.descricao = '';
     }
   },
-})
-
+});
 </script>
+
+<style>
+  .formulario {
+    color: var(--texto-primario);
+    background-color: var(--bg-primario);
+  }
+</style>
 

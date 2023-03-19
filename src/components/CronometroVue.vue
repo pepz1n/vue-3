@@ -1,6 +1,8 @@
 <template>
   <section>
-    <strong> {{ tempoDecorrido }} </strong>
+    <strong class="display">
+      {{ tempoDecorrido }}
+    </strong>
   </section>
 </template>
 
@@ -16,9 +18,15 @@
      },
    },
    computed: {
-     tempoDecorrido () : string{
+     tempoDecorrido () : string {
        return new Date(this.tempoSegundos * 1000).toISOString().substring(11, 19)
      }
    },
  })
 </script>
+
+<style scoped>
+.display {
+  color: var(--texto-primario)
+}
+</style>

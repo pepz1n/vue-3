@@ -27,19 +27,19 @@ export default defineComponent({
   },
 
   methods: {
-    iniciar () {
+    iniciar () : void {
       this.cronometroRodando = true;
       this.cronometro = setInterval(() => {
         this.tempoSegundos++;
       }, 1000);
     },
-    finalizar () {
+    finalizar () : void {
       this.cronometroRodando = false;
       clearInterval(this.cronometro);
       this.$emit('aoTemporizadorFinalizado', this.tempoSegundos);
       this.tempoSegundos = 0;
     },
   }
-})
+});
 
 </script>
