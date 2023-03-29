@@ -1,8 +1,22 @@
 <template>
   <div class="box formulario">
     <div class="columns">
-      <div class="column is-8" role="form" aria-label="Formulario">
+      <div class="column is-5" role="form" aria-label="Formulario">
         <input v-model="descricao" type="text" class="input" placeholder="Qual tarefa você deseja iniciar?">
+      </div>
+      <div class="column is-3">
+        <div class="select">
+          <select v-model="idProjeto">
+            <option value="">Selecione o projeto</option>
+            <option
+              :value="projeto.id"
+              v-for="projeto in projetos"
+              :key="projeto.id"
+            >
+              {{ projeto.nome }}
+            </option>
+          </select>
+        </div>
       </div>
       <div class="column">
         <temporizador-vue @ao-temporizador-finalizado="finalizarTarefa"/>
@@ -12,8 +26,11 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import {computed, defineComponent} from "vue";
+import { useStore } from "vuex";
+import {key} from "@/store";
 import TemporizadorVue from "@/components/TemporizadorVue.vue";
+
 
 export default defineComponent({
   name: 'FormularioVue',
@@ -21,6 +38,7 @@ export default defineComponent({
   data() {
     return {
       descricao: '',
+      idProjeto: '',
     }
   },
   components: {
@@ -31,10 +49,17 @@ export default defineComponent({
       this.$emit('aoSalvarTarefa', {
         duracaoEmSegundos: tempoDecorrido,
         descricao: this.descricao,
+        projeto: this.projetos.find((proj: { id: string; }) => proj.id == this.idProjeto)
       });
       this.descricao = '';
-    }
+    },
   },
+  setup () {
+    const store = useStore(key);
+    return {
+        projetos: computed(() => store.state.projetos)
+    }
+  }
 });
 </script>
 
